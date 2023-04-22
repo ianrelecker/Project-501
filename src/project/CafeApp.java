@@ -1,6 +1,10 @@
 package project;
 
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.time.*;
 
 class CoffeeOrder{
 	String CoffeeName;
@@ -10,8 +14,18 @@ class CoffeeOrder{
 
 public class CafeApp {
 
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
+		try {
+			File file = new File("receipt.txt");
+			file.createNewFile();
+		}catch(IOException e) {
+			//
+		}
+		
+		LocalDateTime da = java.time.LocalDateTime.now();
 		String adds = "_____________Receipt______________\n";
+		adds += "Date: " + da.getMonthValue()+"/"+ da.getDayOfMonth()+"/"+ da.getYear()+" - " + da.getHour()+":"+ da.getMinute() +":"+ da.getSecond()+ "\n";
 		String Drinks[] = {"1.     Iced Coffee   Single	 $3.00\n",
 							"2.     Iced Coffee   Double	 $3.50",
 							"3.     Cappuccino	Single     $3.50",
@@ -134,6 +148,15 @@ public class CafeApp {
 		}
 		
 		
+		}
+		
+		
+		try {
+			FileWriter write = new FileWriter("receipt.txt", true);
+			write.write(adds);
+			write.close();
+		} catch (IOException e) {
+			//
 		}
 		System.out.println("Done!");
 		scanner.close();

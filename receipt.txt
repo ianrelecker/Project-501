@@ -1,0 +1,16 @@
+_____________Receipt______________
+Date: 4/21/2023 - 20:32:4
+Drink #: 1
+Drink Name: Ian
+4.     Cappuccino	Double     $4.00
+Order Total: 4.0
+_____________Receipt______________
+Date: 4/21/2023 - 20:33:44
+Drink #: 1
+Drink Name: Steve
+1.     Iced Coffee   Single	 $3.00
+
+5.     Cinnamon  $1.00
+5.     Cinnamon  $1.00
+5.     Cinnamon  $1.00
+Order Total: 6.0
