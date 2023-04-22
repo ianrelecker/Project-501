@@ -2,10 +2,16 @@ package project;
 
 import java.util.Scanner;
 
-public class ProjectMain {
+class CoffeeOrder{
+	String CoffeeName;
+	String FlavorNames;
+	
+}
+
+public class CafeApp {
 
 	public static void main(String[] args) {
-		String adds = "Receipt\n";
+		String adds = "_____________Receipt______________\n";
 		String Drinks[] = {"1.     Iced Coffee   Single	 $3.00\n",
 							"2.     Iced Coffee   Double	 $3.50",
 							"3.     Cappuccino	Single     $3.50",
@@ -29,13 +35,25 @@ public class ProjectMain {
 				+ "4.     Cappuccino	Double     $4.00\n"
 				+ "5.     Latte	     Single     $3.50\n"
 				+ "6.     Latte	     Double     $4.00\n");
+		boolean repeat = true;
 		Scanner scanner = new Scanner(System.in);
+		double subtotal = 0.0;
+		int drinkCounter = 0;
+		
+		while (repeat) {
+		drinkCounter++;
+		adds += "Drink #: " + drinkCounter + "\n";
+		
+		System.out.println("What is your name?");
+		String name = scanner.next();
+		adds += "Drink Name: " + name + "\n";
+		
 		System.out.print("\n"
 				+ "Select Coffee [1-6]: ");
 		boolean run = true;
 		int inputdrink = 4264;
 		int inputadd = 4264;
-		double subtotal = 42.64;
+		
 		//type checking and forcing value to be between 1 and 6
 		while(run) {
 			try {
@@ -59,7 +77,7 @@ public class ProjectMain {
 		adds += Drinks[inputdrink] + "\n";
 		System.out.println("You selected: " + Drinks[inputdrink]);
 		System.out.println("Subtotal: " + "$"+pricesDrink[inputdrink]+"0\n");
-		subtotal = pricesDrink[inputdrink];
+		subtotal += pricesDrink[inputdrink];
 		System.out.println("=== Select Additional: === \n"
 				+ "\n"
 				+ "1.     Cream     $0.0\n"
@@ -96,11 +114,29 @@ public class ProjectMain {
 					scanner.next();
 				}
 			}
-		adds += "Final Total: " + subtotal;
+		adds += "Order Total: " + subtotal+ "\n";
 		System.out.println(adds);
-		scanner.close();
+		boolean repeatlook = true;
 		
-
+		System.out.println("Would you like to order another drink? \nType \"y\" for yes and \"n\" for no.");
+		while (repeatlook) {
+			String hold = scanner.next();
+			if (hold.equals("y")) {
+				repeat = true;
+				repeatlook = false;
+			}else if (hold.equals("n")) {
+				repeat = false;
+				repeatlook = false;
+			}else {
+				System.out.println("incorrect input");
+			}
+			
+		}
+		
+		
+		}
+		System.out.println("Done!");
+		scanner.close();
 	}
 
 }
