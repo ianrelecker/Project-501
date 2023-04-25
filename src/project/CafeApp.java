@@ -7,25 +7,57 @@ import java.io.FileWriter;
 import java.time.*;
 
 class CoffeeOrder{
-	String CoffeeName;
-	String FlavorNames;
+	public static String CoffeeName;
+	public static String FlavorNames;
+	public static double price;
+	public static String name;
+	public static String datetime;
+	public static int drinkNumber;
+	public static double subtotal;
+	private static String newadds;
 	
-}
-
-public class CafeApp {
-
-	@SuppressWarnings("deprecation")
-	public static void main(String[] args) {
+	public static void register() {
+		newadds += "Name: " + name;
+		name = "";
+		newadds += "Drink #: "+ drinkNumber;
+		newadds += "Coffee: " + CoffeeName;
+		CoffeeName = "";
+		newadds += "Flavors: " + FlavorNames;
+		FlavorNames = "";
+		newadds += "Subtotal: " + subtotal;
+		
+		
+	}
+	
+	public static void Print() {
 		try {
 			File file = new File("receipt.txt");
 			file.createNewFile();
 		}catch(IOException e) {
 			//
 		}
+		String input = "";
+		input += newadds;
+		
+		try {
+			FileWriter write = new FileWriter("receipt.txt", true);
+			write.write(input);
+			write.close();
+		} catch (IOException e) {
+			//
+		}
+	}
+	
+}
+
+public class CafeApp {
+
+	public static void main(String[] args) {
+		
 		
 		LocalDateTime da = java.time.LocalDateTime.now();
 		String adds = "_____________Receipt______________\n";
-		adds += "Date: " + da.getMonthValue()+"/"+ da.getDayOfMonth()+"/"+ da.getYear()+" - " + da.getHour()+":"+ da.getMinute() +":"+ da.getSecond()+ "\n";
+		CoffeeOrder.datetime = "Date: " + da.getMonthValue()+"/"+ da.getDayOfMonth()+"/"+ da.getYear()+" - " + da.getHour()+":"+ da.getMinute() +":"+ da.getSecond()+ "\n";
 		String Drinks[] = {"1.     Iced Coffee   Single	 $3.00\n",
 							"2.     Iced Coffee   Double	 $3.50",
 							"3.     Cappuccino	Single     $3.50",
@@ -59,8 +91,8 @@ public class CafeApp {
 		adds += "Drink #: " + drinkCounter + "\n";
 		
 		System.out.println("What is your name?");
-		String name = scanner.next();
-		adds += "Drink Name: " + name + "\n";
+		CoffeeOrder.name = scanner.next();
+		
 		
 		System.out.print("\n"
 				+ "Select Coffee [1-6]: ");
@@ -88,7 +120,7 @@ public class CafeApp {
 				scanner.next();
 			}
 		}
-		adds += Drinks[inputdrink] + "\n";
+		CoffeeOrder.CoffeeName += Drinks[inputdrink] + "\n";
 		System.out.println("You selected: " + Drinks[inputdrink]);
 		System.out.println("Subtotal: " + "$"+pricesDrink[inputdrink]+"0\n");
 		subtotal += pricesDrink[inputdrink];
@@ -111,7 +143,7 @@ public class CafeApp {
 						if(inputadd==1||inputadd==2||inputadd==3||inputadd==4||inputadd==5||inputadd==6) {
 							//System.out.println("You entered: " + inputadd);
 							inputadd--;
-							adds += Adds[inputadd] + "\n";
+							CoffeeOrder.FlavorNames += Adds[inputadd] + "\n";
 							System.out.println("You selected: " + Adds[inputadd]);
 							subtotal += pricesadd[inputadd];
 							System.out.println("Subtotal: " + "$"+subtotal+"0\n");
@@ -128,8 +160,8 @@ public class CafeApp {
 					scanner.next();
 				}
 			}
-		adds += "Order Total: " + subtotal+ "\n";
-		System.out.println(adds);
+		CoffeeOrder.subtotal = subtotal;
+		System.out.println("Order Total: " + subtotal+ "\n");
 		boolean repeatlook = true;
 		
 		System.out.println("Would you like to order another drink? \nType \"y\" for yes and \"n\" for no.");
@@ -139,6 +171,7 @@ public class CafeApp {
 				repeat = true;
 				repeatlook = false;
 			}else if (hold.equals("n")) {
+				CoffeeOrder.register();
 				repeat = false;
 				repeatlook = false;
 			}else {
@@ -149,15 +182,8 @@ public class CafeApp {
 		
 		
 		}
-		
-		
-		try {
-			FileWriter write = new FileWriter("receipt.txt", true);
-			write.write(adds);
-			write.close();
-		} catch (IOException e) {
-			//
-		}
+		CoffeeOrder.register();
+		CoffeeOrder.Print();
 		System.out.println("Done!");
 		scanner.close();
 	}
