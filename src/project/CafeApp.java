@@ -6,6 +6,20 @@ import java.io.IOException;
 import java.io.FileWriter;
 import java.time.*;
 
+/*************************************************************************
+Project For IT 501 – Fundamentals of Java Programming 
+CafeApp.java
+
+Programmer: Group2
+Last Modified: 4/29/23
+
+Purpose:
+The purpose of this program is to get input from the console and create an order
+with drinks and flavor additions. It gives the subtotal and final total of the order.
+It then formats the text to print to a receipt.txt
+
+*************************************************************************/
+
 //Using CoffeeOrder Class to construct receipt
 class CoffeeOrder{
 	public static String CoffeeName = "";
